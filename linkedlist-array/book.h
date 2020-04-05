@@ -13,7 +13,7 @@ public:
 	string getTitle() const;
 	bool operator==(book);
 	friend ostream& operator<<(ostream& out, const book& b) {
-		out << b.getTitle() << '\n';
+		out << b.getTitle();
 		return out;
 	}
 private:

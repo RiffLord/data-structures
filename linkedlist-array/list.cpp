@@ -7,13 +7,11 @@
 
 template<typename T>
 class List {
-	const static int MAX_LENGTH = 1024;
 	typedef typename Node<T>::item item;
 public:
 	typedef int position;
 	
-	List();
-	List(int);
+	List(int s = 10);
 	List(const List<T>&);	//	Copy constructor
 	~List();
 
@@ -30,29 +28,35 @@ public:
 	void write(item, position);
 	void insert(item, position);
 	void remove(position);
+	void removeDuplicates();
 	void print();
+
+	//	Auxiliary functions to check the status of the list
+	int getLength() const;
+	int getCapacity() const;
 private:
-	Node<T> contents[MAX_LENGTH];
-	int length;
+	Node<T>* contents;
+	int length, capacity;
 };
 
 template<typename T>
-List<T>::List() { init(); }
-
-template<typename T>
-List<T>::List(int size) { length = size; }
+List<T>::List(int s) {
+	capacity = s;
+	contents = new Node<T>[capacity]; 
+	init(); 
+}
 
 template<typename T>
 List<T>::List(const List<T>& l) {
-	//	Change max_length to a dynamic size variable
 	length = l.length;
-	contents = new Node<T>[MAX_LENGTH];
+	capacity = l.capacity;
+	contents = new Node<T>[capacity];
 	for (int i = 0; i < l.length; i++)
 		contents[i] = l.contents[i];
 }
 
 template<typename T>
-List<T>::~List() {}
+List<T>::~List() { delete[] contents; }
 
 template<typename T>
 void List<T>::init() { length = 0; } //	Default value
@@ -61,7 +65,9 @@ template<typename T>
 void List<T>::changeCapacity(Node<T>*& a, int currentSize, int newSize) {
 	if (newSize < 0) throw out_of_range("List::changeCapacity()");
 
-	Node<T>* temp = new T[newSize];
+	capacity = newSize;
+	Node<T>* temp = new Node<T>[capacity];
+
 	int numberOfItems;
 	if (currentSize < newSize) numberOfItems = currentSize;
 	else
@@ -105,7 +111,7 @@ template<typename T>
 typename List<T>::item List<T>::read(position p) const {
 	if (!isValid(p)) 
 		throw std::out_of_range{"List::read()"};
-	return contents[p - 1];
+	return contents[p - 1].readLabel();
 }
 
 template<typename T>
@@ -117,6 +123,7 @@ void List<T>::write(item t, position p) {
 
 template<typename T>
 void List<T>::insert(item t, position p) {
+	if (length == capacity) changeCapacity(contents, length, length * 2);
 	if (0 < p && p <= length + 1) {
 		for (int i = length; i >= p; i--) contents[i] = contents[i - 1];
 		contents[p - 1] = t;
@@ -135,15 +142,33 @@ void List<T>::remove(position p) {
 }
 
 template<typename T>
+void List<T>::removeDuplicates() {
+	typename List<T>::position p, q;
+	p = first();
+
+	while(!endOfList(p)) {
+		q = next(p);
+		while(!endOfList(q)) {
+			if (read(p) == read(q)) remove(q);
+			else q = next(q);
+		}
+		p = next(p);
+	}
+}
+
+template<typename T>
 void List<T>::print() {
 	if (!isEmpty())
-		for (int i = 1; i <= length; i++) {
-			std::cout << contents[i - 1].readLabel() << ' ';
-
-			if (i % 10 == 0) std::cout << '\n';
-		}
+		for (int i = 1; i <= length; i++)
+			std::cout << contents[i - 1].readLabel() << '\n';
 
 	std::cout << std::endl;
 }
+
+template<typename T>
+int List<T>::getLength() const { return length; }
+
+template<typename T>
+int List<T>::getCapacity() const { return capacity; }
 
 #endif // !LIST_H

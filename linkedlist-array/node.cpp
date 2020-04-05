@@ -13,7 +13,7 @@ public:
 	~Node();
 	void writeLabel(item);
 	item readLabel() const;
-	//bool operator==(Node);	//	TO IMPLEMENT
+	bool operator==(Node);
 private:
 	item label;
 };
@@ -35,5 +35,5 @@ void Node<T>::writeLabel(item t) { label = t; }
 template<typename T>
 typename Node<T>::item Node<T>::readLabel() const { return label; }
 
-//template<typename T>
-//bool Node<T>::operator==(Node n) {}
+template<typename T>
+bool Node<T>::operator==(Node n) { return readLabel() == n.readLabel(); }
