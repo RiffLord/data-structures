@@ -39,24 +39,28 @@ private:
 	int length, capacity;
 };
 
+//==================== Constructors/destructor ====================
+
 template<typename T>
 List<T>::List(int s) {
 	capacity = s;
 	contents = new Node<T>[capacity]; 
-	init(); 
+	this->init(); 
 }
 
 template<typename T>
 List<T>::List(const List<T>& l) {
-	length = l.length;
-	capacity = l.capacity;
-	contents = new Node<T>[capacity];
+	this->length = l.length;
+	this->capacity = l.capacity;
+	this->contents = new Node<T>[capacity];
 	for (int i = 0; i < l.length; i++)
-		contents[i] = l.contents[i];
+		this->contents[i] = l.contents[i];
 }
 
 template<typename T>
 List<T>::~List() { delete[] contents; }
+
+//==================== Operators ======================
 
 template<typename T>
 void List<T>::init() { length = 0; } //	Default value
