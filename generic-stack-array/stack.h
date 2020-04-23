@@ -1,4 +1,4 @@
-//	Generic stack data structure
+#//	Generic stack data structure
 #ifndef STACK_H
 #define STACK_H
 
