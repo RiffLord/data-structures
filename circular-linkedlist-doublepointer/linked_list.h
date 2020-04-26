@@ -2,7 +2,7 @@
 #define LINKED_LIST_H
 
 #include <assert.h>
-#include "virtual_list.hpp"
+#include "virtual_list.h"
 
 template<class T>
 class linked_list;
@@ -142,6 +142,7 @@ void linked_list<T>::remove(position p) {
 	if (!isEmpty() && !end(p)) {
 		(p->prev)->next = p->next;
 		(p->next)->prev = p->prev;
+		length--;
 		delete p;
 	}
 }

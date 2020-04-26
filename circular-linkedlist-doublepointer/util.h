@@ -1,8 +1,38 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include "list.cpp"
+#include "linked_list.h"
 
+template<typename T>
+void invert(linked_list<T>& list) {
+	typename linked_list<T>::position p = list.first();
+	typename linked_list<T>::position q = list.last();
+	for (int i = 0; i < list.size() / 2; i++) {
+		typename linked_list<T>::data_type temp = list.read(q);
+		list.write(list.read(p), q);
+		list.write(temp, p);
+		p = list.next(p);
+		q = list.previous(q);
+	}
+}
+
+template<typename T>
+bool isPalindrome(linked_list<T>& list) {
+	typename linked_list<T>::position forward = list.first();
+	typename linked_list<T>::position backward = list.last();
+	
+	bool palin = true;
+	for (int i = 0; i < list.size() / 2; i++) {
+		if (list.read(forward) != list.read(backward))
+			return false;
+		
+		forward = list.next(forward);
+		backward = list.previous(backward);
+	}
+	return palin;
+}
+
+/*
 template<typename T>
 list<T> merge(list<T>& l1, list<T>& l2) {
 	list<T> merged;
@@ -38,5 +68,6 @@ list<T> merge(list<T>& l1, list<T>& l2) {
 	
 	return merged;
 }
+*/
 
 #endif // !UTIL_H
