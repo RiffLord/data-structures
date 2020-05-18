@@ -19,4 +19,13 @@ int main() {
     acquire(g);
     cout << "g.isEmpty(): " << (g.isEmpty() ? "true" : "false") << endl;
     printNodes(g);
+    printLinks(g);
+    cout << "Vertices: " << vertices(g) << endl;
+    cout << "Lines:    " << lines(g) << endl;
+
+    node<nd>* position = g.nodes.read(g.nodes.first());
+    cout << "DFS:" << endl;
+    dfs(g, position);
+
+    //  TODO: verify distance function works correctly.
 }

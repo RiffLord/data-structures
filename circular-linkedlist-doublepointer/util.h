@@ -32,6 +32,7 @@ bool isPalindrome(linked_list<T>& list) {
 	return palin;
 }
 
+
 /*
 template<typename T>
 list<T> merge(list<T>& l1, list<T>& l2) {

@@ -2,7 +2,7 @@
 #include <string>
 #include "dictionary.h"
 #include "linked_list.h"
-#include "util.h"
+
 using namespace std;
 
 int main() {

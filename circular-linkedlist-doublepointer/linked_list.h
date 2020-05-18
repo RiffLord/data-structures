@@ -1,6 +1,7 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+#include <iostream>
 #include <assert.h>
 #include "virtual_list.h"
 
@@ -11,6 +12,8 @@ template<class T>
 class node {
 	//	Allows the linked_list class to access the node's private members.
 	friend class linked_list<T>;
+public:
+	T getData() const { return data; }
 private:
 	T data;
 	node<T>* prev;
@@ -19,6 +22,19 @@ private:
 
 template<class T>
 class linked_list : public virtual_list<T, node<T>*> {
+
+	friend ostream& operator<<(ostream& out, const linked_list<T>& L) {
+		node<T>* temp = L.first();
+		if (!L.isEmpty()) {
+			do {
+				out << L.read(temp);
+				temp = L.next(temp);
+			} while (!L.end(temp));
+			out << std::endl;
+		}
+		return out;
+	}
+
 public:
 	typedef typename virtual_list<T, node<T>*>::data_type data_type;
 	typedef typename virtual_list<T, node<T>*>::position position;

@@ -45,40 +45,92 @@ void acquire(graph<L, N>& g) {
 
 template<class L, class N>
 void printNodes(graph<L, N>& g) {
-    //  TODO: make this work...
-    
     node<N>* position;
     listNode<node<N>*>* pos = g.nodes.first();
     listNode<node<N>*>* adjPos;
     linked_list<node<N>*> adjNodes;
-    while (pos != NULL) {
+    while (pos->getData() != nullptr) {
         adjNodes.init();
         position = pos->getData();
         adjNodes = g.adjecent(position);
         std::cout << std::endl;
         std::cout << "Node# " << pos->getData()->getInfo() << ' ';
         adjPos = adjNodes.first();
-        while (adjPos != NULL) {
+        while (adjPos->getData() != nullptr) {
             std::cout << "Adjecent: " << adjPos->getData()->getInfo() << ' ';
             adjPos = adjNodes.next(adjPos);
-
-            std::cout << "Got here...1\n";
         }
-        std::cout << "Got here...2\n";
         std::cout << " " << std::endl;
         pos = g.nodes.next(pos);
-        std::cout << "Got here...3\n";
     }
     std::cout << std::endl;
 }
 
 template<class L, class N>
-void printLinks(graph<L, N>& g) {}
+void printLinks(graph<L, N>& g) {
+    listNode<link<L, N>*>* pos = g.links.first();
+    while (pos->getData() != nullptr) {
+        std::cout << "Link#" << pos->getData()->getInfo() << ' '
+                  << pos->getData()->getSrcNode()->getInfo() << "->"
+                  << pos->getData()->getDestNode()->getInfo() << std::endl;
+        pos = g.links.next(pos);
+    }
+    std::cout << std::endl;
+}
 
 template<class L, class N>
-int vertices(graph<L, N>& g) { return 0; }
+void readNode(graph<L, N>& g, node<N>* n) {
+    if (!n->isEmpty()) std::cout << n->getInfo() << ' ';
+}
 
 template<class L, class N>
-int lines(graph<L, N>& g) { return 0; }
+int vertices(graph<L, N>& g) {
+    int i = 0;
+    listNode<node<N>*>* pos = g.nodes.first();
+    while (!g.nodes.end(pos)) {
+        pos = g.nodes.next(pos);
+        i++;
+    } 
+    return i; 
+}
+
+template<class L, class N>
+int lines(graph<L, N>& g) {
+    int i = 0;
+    listNode<link<L, N>*>* pos = g.links.first();
+    while (!g.links.end(pos)) {
+        pos = g.links.next(pos);
+        i++;
+    } 
+    return i; 
+}
+
+template<class L, class N>
+void unvisitVertices(graph<L, N> &g) {
+    node<N>* n;
+    listNode<node<N>*>* pos;
+    if (!g.nodes.isEmpty()) {
+        pos = g.nodes.first();
+        while (!g.nodes.end(pos)) {
+            n = g.nodes.read(pos);
+            n->visitState(false);
+            pos = g.nodes.next(pos);
+        }
+    }
+}
+
+template<class L, class N>
+void dfs(graph<L, N>& g, node<N>* n) {
+    unvisitVertices(g);
+    readNode(g, n);
+    listNode<node<N>*>* pos;
+    node<N>* adj;
+    pos = g.adjecent(n).first();
+    while (!g.adjecent(n).end(pos)) {
+        adj = g.adjecent(n).read(pos);
+        if (adj->visit()) dfs(g, adj);
+        pos = g.adjecent(n).next(pos);
+    }
+}
 
 #endif // GRAPHUTIL_H

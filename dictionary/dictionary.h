@@ -5,7 +5,6 @@
 #include <iomanip>
 #include <string>
 #include "linked_list.h"
-#include "util.h"
 
 #define SIZE 100
 
@@ -69,27 +68,22 @@ bool dictionary<T>::contains(dictionary_item<T> item) const {
     }
 }
 
+//  Adds an item to the list maintaining an ascending ordering.
 template<typename T>
-void InsOrdine(linked_list<T>* L, T elem)
-{
+void insertAscOrder(linked_list<T>* L, T item) {
     node<T>* pos = L->first();
-    while(!L->end(pos) && elem->getKey() > L->read(pos)->getKey()) {
+    while(!L->end(pos) && item->getKey() > L->read(pos)->getKey())
         pos = L->next(pos);
-    }
-    L->insert(elem,pos);
+
+    L->insert(item, pos);
 }
 
 template<class T>
 void dictionary<T>::insert(dictionary_item<T> item) {
     int pos = HashFunction(item);
     dictionary_item<T>* newItem = new dictionary_item<T>;
-
-    T attribute = item.getAttribute();
-    newItem->setAttribute(attribute);
-    //  Rename this
-    InsOrdine(&hashTable[pos], newItem);
-
-    std::cout << "Got here\n";
+    newItem->setAttribute(item.getAttribute());
+    insertAscOrder(&hashTable[pos], newItem);
 }
 
 template<class T>

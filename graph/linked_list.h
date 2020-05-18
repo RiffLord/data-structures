@@ -13,6 +13,7 @@ class listNode {
 	//	Allows the linked_list class to access the listNode's private members.
 	friend class linked_list<T>;
 public:
+	listNode() { data = nullptr; }
 	T getData() const { return data; }
 private:
 	T data;
