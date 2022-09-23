@@ -2,7 +2,7 @@
  * @file    tree.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Binary tree data structure implementation
- * @version 0.4
+ * @version 0.5
  * @date    2022-08-30
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -11,109 +11,51 @@
 #include <cmath>
 #include "tree.h"
 
-Tree::Tree() { 
+Tree::Tree() {
 	root = nullptr;
-	height = totalNodes = 0; 
+    height = totalNodes = 0;
 }
 
-Tree::Tree(Node *n) {
-    if (isLeaf(n))
-        setRoot(n);
-}
+Tree::Tree(Node *n) { setRoot(n); }
 
-Tree::Tree(const Tree &t) {
-    if (!t.isEmpty()) {
-        setRoot(t.getRoot());
-    }
-}
-
-Tree::~Tree() {}
+//  TODO:   correctly implement class destructor
+Tree::~Tree() { delete root; }
 
 bool Tree::isEmpty() const { return root == nullptr; }
 
-//  TODO: implement isLeaf
 bool Tree::isLeaf(Node *n) const {
-    if (!isEmpty()) {
-        if (hasLeftChild(n) || hasRightChild(n))
-            return false;
-        return true;
-    }
+    if (n->getLeftChild() != nullptr || n->getRightChild() != nullptr)
+		return false;
+	return true;
 }
 
-bool Tree::hasLeftChild(Node *n) const {
-    if (!isEmpty()) {
-        if (isLeaf(n)) return false;
-        if (n != nullptr && 
-            leftChild(n) != nullptr) return true;
-    }
-    return false;
-}
-
-bool Tree::hasRightChild(Node *n) const {
-    if (!isEmpty()) {
-        if (isLeaf(n)) return false;
-        if (n != nullptr && 
-            rightChild(n) != nullptr) return true;
-    }
-    return false;
-}
-
-//  TODO:   n must be a leaf
 void Tree::setRoot(Node *n) {
-    if (isEmpty() && isLeaf(n))
-        root = new Node(n->getData());
+	if (isEmpty() && isLeaf(n) && n != nullptr)
+		root = n;
 }
 
 void Tree::setValue(int t, Node *n) {
-    if (n != nullptr)
+    if (n != nullptr) {
         n->setData(t);
+    }
 }
 
 Node *Tree::getRoot() const {
-    if (!isEmpty()) 
-        return root; 
+    if (isEmpty())
+        throw std::runtime_error{"Tree::getRoot()\nTree::isEmpty() == true"}; 
+    return root; 
 }
 
 Node *Tree::parent(Node *n) const {
-    if (getRoot() != n) {
-        //  TODO: return n's parent
-    }
+    //  TODO:   gracefully fail if attempting to call function on root node
+    if (n == root) return nullptr;
+    return n->getParent();
 }
 
-Node *Tree::leftChild(Node *n) const {
-    if (!isLeaf(n)) return n->getLeftChild();
-}
+//  TODO:   assert n != nullptr
+Node *Tree::leftChild(Node *n) const { return n->getLeftChild(); }
 
-Node *Tree::rightChild(Node *n) const {
-    if (!isLeaf(n)) return n->getRightChild();
-}
+//  TODO:   assert n != nullptr
+Node *Tree::rightChild(Node *n) const { return n->getRightChild(); }
 
-int Tree::readNode(Node *n) const {
-    if (n != nullptr)
-        return n->getData();
-}
-
-//  TODO: add subtree
-void Tree::addSubtree(Node *n, Node *u, const Tree &t) {
-    if (!isEmpty() && !t.isEmpty()) {
-        if (n == u) {
-            //  TODO: adding subtree with 
-        }
-        if (isLeaf(n)) {
-
-        }
-    }
-}
-
-//  TODO: remove subtree
-void Tree::removeSubtree(Node *n) {
-    if (!isEmpty()) {
-        if (getRoot() == n && isLeaf(n)) {
-            delete n;
-        }
-    }
-}
-
-unsigned int Tree::getHeight() const { return height; }
-
-bool Tree::isComplete() const { return totalNodes == pow(2, height); }
+int Tree::readNode(Node *n) const { return n->getData(); }

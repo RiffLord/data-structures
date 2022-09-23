@@ -2,7 +2,7 @@
  * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Test file for the binary tree data structure
- * @version 0.3
+ * @version 0.4
  * @date    2022-08-30
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -25,12 +25,16 @@ int main(void) {
     Tree t;
     if (t.isEmpty()) cout << "t.isEmpty() : true" << endl;
     Node *n = new Node(666);
+    cout << "Created new node n @ memory location " << n << endl;
     t.setRoot(n);
-    delete n;
-    cout << t.getRoot()->getData() << '\n' << t.getRoot()->getParent() << '\n' <<
-            t.getRoot()->getSibling() << '\n' << t.getRoot()->getLeftChild() << '\n' <<
-            t.getRoot()->getRightChild() << endl;
+    //delete n;
+    cout << "t.getRoot()->getData()        : " << t.getRoot()->getData() << '\n' 
+         << "t.getRoot()->getParent()      : " << t.getRoot()->getParent() << '\n' 
+         << "t.getRoot()->getSibling()     : " << t.getRoot()->getSibling() << '\n' 
+         << "t.getRoot()->getLeftChild()   : " << t.getRoot()->getLeftChild() << '\n' 
+         << "t.getRoot()->getRightChild()  : " << t.getRoot()->getRightChild() << endl;
     if (!t.isEmpty()) cout << "t.isEmpty() : false" << endl;
-    cout << t.getRoot() << endl;
+    cout << "t.getRoot() : " << t.getRoot() << endl;
+    cout << "t.readNode(t.getRoot()) : " << t.readNode(t.getRoot()) << endl;
     return 0;
 }

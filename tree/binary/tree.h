@@ -15,7 +15,7 @@
 class Tree {
     friend std::ostream &operator<<(std::ostream &, const Tree &);
 public:
-    Tree(/* args */);
+    Tree();
     Tree(const Tree &);
     Tree(Node *);
     ~Tree();
