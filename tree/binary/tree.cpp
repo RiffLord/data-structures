@@ -2,15 +2,19 @@
  * @file    tree.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Binary tree data structure implementation
- * @version 0.3
+ * @version 0.4
  * @date    2022-08-30
  * 
  * @copyright NO COPYRIGHT !(c) 2022
  * 
  */
+#include <cmath>
 #include "tree.h"
 
-Tree::Tree() { root = nullptr; }
+Tree::Tree() { 
+	root = nullptr;
+	height = totalNodes = 0; 
+}
 
 Tree::Tree(Node *n) {
     if (isLeaf(n))
@@ -109,3 +113,7 @@ void Tree::removeSubtree(Node *n) {
         }
     }
 }
+
+unsigned int Tree::getHeight() const { return height; }
+
+bool Tree::isComplete() const { return totalNodes == pow(2, height); }

@@ -2,7 +2,7 @@
  * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Testing and debugging a pointer-based stack's operations
- * @version 0.2
+ * @version 0.3
  * @date    2022-08-22
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -10,7 +10,13 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "..\stack.h"
+#ifdef __linux__
+    #include "../stack.h"
+#elif _WIN32
+    #include "..\stack.h"
+#else
+    #error Platform not supported
+#endif
 
 int main(void) {
     using namespace std;

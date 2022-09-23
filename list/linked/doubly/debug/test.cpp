@@ -2,7 +2,7 @@
  * @file test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Testing the doubly linked array-based list
- * @version 0.3
+ * @version 0.4
  * @date    2022-08-16
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -11,8 +11,15 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#include "..\list.h"
-#include "..\listops.h"
+#ifdef __linux__
+    #include "../list.h"
+    #include "../listops.h"
+#elif _WIN32
+    #include "..\list.h"
+    #include "..\listops.h"
+#else
+    #error Platform not supported
+#endif
 
 int main(void) {
     srand(time(NULL));

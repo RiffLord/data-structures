@@ -2,7 +2,7 @@
  * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Test file for the binary tree data structure
- * @version 0.2
+ * @version 0.3
  * @date    2022-08-30
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -11,7 +11,13 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "..\tree.h"
+#ifdef __linux__
+    #include "../tree.h"
+#elif _WIN32
+    #include "..\tree.h"
+#else
+    #error Platform not supported
+#endif
 
 int main(void) {
     using namespace std;

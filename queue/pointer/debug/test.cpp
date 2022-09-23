@@ -2,7 +2,7 @@
  * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Testing/debugging a pointer-based queue data structure
- * @version 0.2
+ * @version 0.3
  * @date    2022-08-17
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -11,7 +11,13 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "..\queue.h"
+#ifdef __linux__
+    #include "../queue.h"
+#elif _WIN32
+    #include "..\queue.h"
+#else
+    #error Platform not supported
+#endif
 
 int main(void) {
     using namespace std;

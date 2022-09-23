@@ -2,7 +2,7 @@
  * @file    tree.h
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Binary tree data structure definition
- * @version 0.3
+ * @version 0.4
  * @date    2022-08-30
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -32,8 +32,13 @@ public:
     void setValue(int, Node *);
     void addSubtree(Node *, Node *, const Tree &);
     void removeSubtree(Node *);
+    unsigned int getHeight() const;
+    
+    bool isComplete() const;
 private:
     Node *root;
+    unsigned int height;
+    unsigned int totalNodes;
 };
 
 #endif // !TREE_H

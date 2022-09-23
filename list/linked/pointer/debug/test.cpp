@@ -2,7 +2,7 @@
  * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Testing the pointer implementation of a linked list data structure
- * @version 0.3
+ * @version 0.4
  * @date    2022-08-17
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -11,7 +11,13 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#include "..\list.h"
+#ifdef __linux__
+    #include "../list.h"
+#elif _WIN32
+    #include "..\list.h"
+#else
+    #error Platform not supported
+#endif
 
 int main(void) {
     using namespace std;

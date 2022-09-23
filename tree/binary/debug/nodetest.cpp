@@ -2,14 +2,20 @@
  * @file nodetest.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Testing node class for use in a binary tree data structure
- * @version 0.1
+ * @version 0.2
  * @date 2022-09-05
  * 
  * @copyright NO COPYRIGHT !(c) 2022
  * 
  */
 #include <iostream>
-#include "..\node.h"
+#ifdef __linux__
+     #include "../node.h"
+#elif _WIN32
+     #include "..\node.h"
+#else
+     #error Platform not supported
+#endif
 
 int main(void) {
     Node *n = new Node(666);
