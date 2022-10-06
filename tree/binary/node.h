@@ -2,7 +2,7 @@
  * @file    node.h
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Node class definition for use in a binary tree data structure
- * @version 1.1
+ * @version 1.2
  * @date    2022-08-17
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -18,23 +18,23 @@ class Node {
 public:
     Node(int = 0, Node * = nullptr, 
                   Node * = nullptr, 
-                  Node * = nullptr, 
+                  //Node * = nullptr, 
                   Node * = nullptr);
     Node(const Node &);
     int getData() const;
     Node *getParent() const;
-    Node *getSibling() const;
+    //Node *getSibling() const;
     Node *getLeftChild() const;
     Node *getRightChild() const;
     void setData(int);
     void setParent(Node *);
-    void setSibling(Node *);
+    //void setSibling(Node *);
     void setLeftChild(Node *);
     void setRightChild(Node *);
 private:
     int data;
     Node *parent;
-    Node *sibling;
+    //Node *sibling;
     Node *leftChild;
     Node *rightChild;
 };
