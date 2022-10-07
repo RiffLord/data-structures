@@ -22,17 +22,17 @@
 
 int main(void) {
     using namespace std;
-    List myList;
+    List<int> myList;
     if (myList.isEmpty()) cout << "myList.isEmpty() : true\n";
     srand(time(NULL));
-    List::position p = myList.first();
+    List<int>::position p = myList.first();
     int range = 1 + rand() % 99, i;
     for (i = 0; i < range; i++) {
         myList.insert(rand() % 99, p);
         p = myList.next(p);
     }
     if (!myList.isEmpty()) cout << "myList.isEmpty() : false\n";
-    List::position randPos = rand() % range;
+    List<int>::position randPos = (rand() % range) - 1;
     cout << myList.read(randPos) << endl;
     cout << endl << myList << endl;
     p = myList.first();
@@ -47,13 +47,13 @@ int main(void) {
     cout << endl << myList << endl;
     myList.remove(randPos);
     cout << endl << myList << endl;
-    List listy = myList;
+    List<int> listy = myList;
     cout << "Printing listy...\n" << listy << endl;
     myList.remove(randPos);
     cout << "myList.last() : " << myList.last() << endl;
     cout << "listy.last() : " << listy.last() << endl;
     cout << "listy.previous(listy.last()) : " << listy.previous(listy.last()) << endl;
-    List l1, l2;
+    List<int> l1, l2;
     l1 = l2 = listy;
     cout << l1 << endl << l2 << endl;
     if (l1 == listy) cout << "l1 == listy : true" << endl;
