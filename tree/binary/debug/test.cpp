@@ -1,8 +1,8 @@
 /**
  * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
- * @brief   Test file for the binary tree data structure
- * @version 0.8
+ * @brief   Test file for the binary Tree<int> data structure
+ * @version 0.9
  * @date    2022-08-30
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -22,10 +22,10 @@
 int main(void) {
     using namespace std;
     srand(time(NULL));
-    Tree t;
+    Tree<int> t;
     if (t.isEmpty()) cout << "t.isEmpty() : true" << endl;
-    Node *n = new Node(666);
-    cout << "Created new node n @ memory location " << n << endl;
+    Node<int> *n = new Node<int>(666);
+    cout << "Created new Node<int> n @ memory location " << n << endl;
     t.insertRoot(n);
     if (t.hasLeftChild(t.getRoot())) cout << "t.hasLeftChild(t.getRoot()) : true\n";
     else cout << "t.hasLeftChild(t.getRoot()) : false\n";

@@ -1,8 +1,8 @@
 /**
  * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
- * @brief   Testing and debugging a pointer-based stack's operations
- * @version 0.3
+ * @brief   Testing and debugging a generic pointer-based stack's operations
+ * @version 0.4
  * @date    2022-08-22
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -21,7 +21,7 @@
 int main(void) {
     using namespace std;
     srand(time(NULL));
-    Stack myStack;
+    Stack<float> myStack;
     if (myStack.isEmpty()) cout << "myStack.isEmpty() : true" << endl;
     cout << "myStack.getSize() : " << myStack.getSize() << endl;
     int i;
@@ -40,7 +40,7 @@ int main(void) {
     myStack.pop();
     cout << myStack;
     cout << "myStack.getSize() : " << myStack.getSize() << endl;
-    Stack otherStack = myStack;
+    Stack<float> otherStack = myStack;
     cout << "Printing otherStack after initializing with overloaded copy constructor" << endl;
     cout << otherStack << endl << "otherStack.getSize() : " << otherStack.getSize() << endl;
     if (otherStack == myStack) cout << "otherStack == myStack : true" << endl;

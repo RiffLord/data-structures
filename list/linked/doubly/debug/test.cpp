@@ -1,8 +1,8 @@
 /**
- * @file test.cpp
+ * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
- * @brief   Testing the doubly linked array-based list
- * @version 0.4
+ * @brief   Testing the generic doubly linked array-based list
+ * @version 0.5
  * @date    2022-08-16
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -13,25 +13,25 @@
 #include <time.h>
 #ifdef __linux__
     #include "../list.h"
-    #include "../listops.h"
+    //#include "../listops.h"
 #elif _WIN32
     #include "..\list.h"
-    #include "..\listops.h"
+    //#include "..\listops.h"
 #else
     #error Platform not supported
 #endif
 
 int main(void) {
     srand(time(NULL));
-    List myList;
-    List bigList(25);
+    List<int> myList;
+    List<int> bigList(25);
     using namespace std;
     cout << "myList.getCapacity() : " << myList.getCapacity() << endl;
     cout << "bigList.getCapacity() : " << bigList.getCapacity() << endl;
     cout << "myList.getLength() : " << myList.getLength() << endl;
     cout << "bigList.getLength() : " << bigList.getLength() << endl;
     if (myList.isEmpty()) cout << "myList.isEmpty() : true" << endl;
-    List::position p = myList.first();
+    List<int>::position p = myList.first();
     if (!myList.isValid(p)) cout << "myList.isValid(" << p << ") : false" << endl;
     myList.insert(42, p);
     if (!myList.isEmpty()) cout << "myList.isEmpty() : false" << endl;
@@ -86,10 +86,11 @@ int main(void) {
     cout << endl << myList << endl;
     myList.range(myList.first());
     cout << "myList.range()\n" << myList << endl;
-    List L, M;
-    int n = 1 + rand() % 9;
-    List::position q = L.first(), r = M.first();
-    firstN(n, q, r, L, M);
-    cout << "L:\n" << L << endl << "M:\n" << M << endl;
+    //List<int> L;
+    //List<int> M;
+    //int n = 1 + rand() % 9;
+    //List<int>::position q = L.first(), r = M.first();
+    //firstN(n, q, r, L, M);
+    //cout << "L:\n" << L << endl << "M:\n" << M << endl;
     return 0;
 }

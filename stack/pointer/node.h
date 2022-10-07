@@ -1,8 +1,8 @@
 /**
  * @file    node.h
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
- * @brief   Node class definition for use in various pointer-based data structures
- * @version 1.0
+ * @brief   Generic node class definition for use in various pointer-based data structures
+ * @version 1.1
  * @date    2022-08-17
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -12,19 +12,49 @@
 #define NODE_H
 #include <iostream>
 
-class Node {
-    friend std::ostream &operator<<(const std::ostream &, const Node &);
-    friend std::istream &operator>>(const std::istream &, const int &);
+template <typename T> class Node {
+    friend std::ostream &operator<<(std::ostream &out, const Node &n) {
+        out << n.getData() << '\n';
+        return out;
+    }
+    friend std::istream &operator>>(std::istream &in, const T &t) {
+        in >> t;
+        return in;
+    }
 public:
-    Node(int = 0, Node * = nullptr);
+    Node(T, Node * = nullptr);
     Node(const Node &);
-    int getData() const;
+    T getData() const;
     Node *getNext() const;
-    void setData(int);
+    void setData(T);
     void setNext(Node *);
 private:
     int data;
     Node *next;
 };
+
+template <typename T>
+Node<T>::Node(T t, Node<T> *n) {
+    data = t;
+    next = n;
+}
+
+template <typename T>
+Node<T>::Node(const Node<T> &rval) {
+    data = rval.data;
+    next = rval.next;
+}
+
+template <typename T>
+T Node<T>::getData() const { return data; }
+
+template <typename T>
+Node<T> *Node<T>::getNext() const { return next; }
+
+template <typename T>
+void Node<T>::setData(T t) { data = t; }
+
+template <typename T>
+void Node<T>::setNext(Node<T> *n) { next = n; }
 
 #endif // !NODE_H

@@ -1,8 +1,8 @@
 /**
  * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
- * @brief   Testing/debugging a pointer-based queue data structure
- * @version 0.3
+ * @brief   Testing/debugging a generic pointer-based queue data structure
+ * @version 0.4
  * @date    2022-08-17
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -22,7 +22,7 @@
 int main(void) {
     using namespace std;
     srand(time(NULL));
-    Queue q;
+    Queue<int> q;
     if (q.isEmpty()) cout << "q.isEmpty() : true" << endl;
     cout << "q.getSize() : " << q.getSize() << endl;
     q.push(rand() % 99);

@@ -1,16 +1,16 @@
 /**
  * @file    test.cpp
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
- * @brief   Testing the pointer implementation of a linked list data structure
- * @version 0.4
+ * @brief   Testing the pointer implementation of a generic linked list data structure
+ * @version 0.5
  * @date    2022-08-17
  * 
  * @copyright NO COPYRIGHT !(c) 2022
  * 
  */
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 #ifdef __linux__
     #include "../list.h"
 #elif _WIN32
@@ -19,15 +19,16 @@
     #error Platform not supported
 #endif
 
+//  TODO:   test class with other types of data
 int main(void) {
     using namespace std;
     srand(time(NULL));
-    List myList;
+    List<int> myList;
     if (myList.isEmpty()) cout << "myList.isEmpty() : true" << endl;
     if (myList.endOfList(myList.first())) cout << "endOfList(first()) : true" << endl;
     cout << "Populating list..." << endl;
     int i;
-    List::position p = myList.first();
+    List<int>::position p = myList.first();
     for (i = 0; i < 10; i++) {
         myList.insert(i + rand() % 89, p);
         p = myList.next(p);
@@ -69,8 +70,8 @@ int main(void) {
         p = myList.next(p);
     }
     cout << "Re-populated myList...\n" << myList << endl;
-    List otherList;
-    List::position q = otherList.first();
+    List<int> otherList;
+    List<int>::position q = otherList.first();
     otherList.insert(rand() % 99, q);
     otherList.insert(rand() % 99, q);
     otherList.insert(rand() % 99, q);
@@ -91,7 +92,7 @@ int main(void) {
     }
     cout << "myList after expanding with new data...\n" << myList << endl;
     //cout << "Assigning otherList to myList..." << endl;
-//    myList = otherList;
+    //myList = otherList;
   
     return 0;
 }
