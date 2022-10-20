@@ -2,7 +2,7 @@
  * @file    list.h
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Generic pointer-based linked list data structure definition
- * @version 0.2
+ * @version 0.3
  * @date    2022-08-17
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -36,6 +36,7 @@ public:
     void write(T, position);
     void insert(T, position);
     void remove(position);
+    void print();
 
     unsigned int getLength() const;
     List & operator=(const List &);
@@ -176,5 +177,15 @@ bool List<T>::operator==(const List<T> &rval) const {
 
 template <typename T>
 bool List<T>::operator!=(const List<T> &rval) const { return !(*this == rval); }
+
+template <typename T>
+void List<T>::print() {
+    using namespace std;
+    List::position p = head;
+    while (!endOfList(p)) {
+        cout << read(p) << endl;
+        p = next(p);
+    }
+}
 
 #endif // !LIST_H

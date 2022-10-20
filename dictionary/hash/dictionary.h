@@ -2,7 +2,7 @@
  * @file      dictionary.h
  * @author    Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief     Generic dictionary data structure
- * @version   0.1
+ * @version   0.2
  * @date      2022-10-09
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -18,7 +18,7 @@ public:
     Dictionary(unsigned int);
     ~Dictionary();
     bool isEmpty() const;
-    bool belongsTo(const T &) const;
+    bool belongs(const T &) const;
     T read(const T &) const;
     void insert(const T &);
     void remove(const T &);
@@ -26,7 +26,7 @@ public:
     unsigned int calculateHash(const T &) const;
     void print();
 private:
-    hashValue hash;
+    hashValue hsh;
     unsigned int length;
     unsigned int numberOfItems;
     List<T> *table;
@@ -46,7 +46,7 @@ template <class T>
 bool Dictionary<T>::isEmpty() const { return numberOfItems == 0; }
 
 template <class T>
-bool Dictionary<T>::belongsTo(const T &item) const {
+bool Dictionary<T>::belongs(const T &item) const {
     typename List<T>::position iterator;
     bool itemFound = false;
     unsigned int pos = hashValue(item);
@@ -61,7 +61,7 @@ bool Dictionary<T>::belongsTo(const T &item) const {
 
 template <class T>
 void Dictionary<T>::insert(const T &item) {
-    table[hashValue(item)].insert(table[hashValue(item)].first(), item);
+    table[hashValue(item)].insert(item, table[hashValue(item)].first());
     ++numberOfItems;
 }
 
@@ -84,7 +84,7 @@ void Dictionary<T>::remove(const T &item) {
 
 template <class T>
 unsigned int Dictionary<T>::calculateHash(const T &key) const {
-    return (hash(key) % length);
+    return (hash(std::to_string(key)) % length);
 }
 
 template <class T>
@@ -93,7 +93,7 @@ unsigned int Dictionary<T>::size() const { return numberOfItems; }
 template <class T>
 void Dictionary<T>::print() {
     for (int i = 0; i < length; i++)
-        std::cout << table[i] << std::endl;
+        table[i].print();
 }
 
 #endif // !DICTIONARY_H
