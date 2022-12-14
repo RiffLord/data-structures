@@ -11,6 +11,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <cstring>
 #ifdef __linux__
     #include "../list.h"
 #elif _WIN32
@@ -93,6 +94,20 @@ int main(void) {
     cout << "myList after expanding with new data...\n" << myList << endl;
     //cout << "Assigning otherList to myList..." << endl;
     //myList = otherList;
-  
+    List<string> strList;
+    List<string>::position pos = strList.first();
+    strList.insert("Delboy", pos);
+    pos = strList.next(pos);
+    strList.insert("Rodney", pos);
+    pos = strList.next(pos);
+    strList.insert("Trigger", pos);
+    pos = strList.next(pos);
+    strList.insert("Renée", pos);
+    pos = strList.next(pos);
+    strList.insert("Leclerc", pos);
+    pos = strList.next(pos);
+    strList.insert("Mr. Hilter", pos);
+    pos = strList.next(pos);
+    cout << strList << endl;
     return 0;
 }

@@ -2,7 +2,7 @@
  * @file    list.h
  * @author  Bruno Pezer (bruno.pezer@tutanota.com)
  * @brief   Definition file for a generic array-based list data structure.
- * @version 0.4
+ * @version 0.5
  * @date    2022-08-15
  * 
  * @copyright NO COPYRIGHT !(c) 2022
@@ -83,19 +83,17 @@ typename List<T>::position List<T>::last() const { return length; }
 //  TODO:   Throw out_of_range if p is not a valid position
 template <typename T>
 typename List<T>::position List<T>::next(position p) const {
-    if (isValid(p))
-        return p + 1;
-    else
-        return p;
+    if (!isValid(p))
+        throw std::range_error{"List::next()"};
+    return p + 1;
 }
 
 //  TODO:   Throw out_of_range if p is not a valid position
 template <typename T>
 typename List<T>::position List<T>::previous(position p) const {
-    if (isValid(p))
-        return p - 1;
-    else
-        return p;
+    if (!isValid(p))
+        throw std::range_error{"List::previous()"};
+    return p - 1;
 }
 
 template <typename T>
