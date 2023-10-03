@@ -1,12 +1,12 @@
 /**
  * @file    test.cpp
- * @author  Bruno Pezer (bruno.pezer@tutanota.com)
+ * @author  Bruno Pezer
  * @brief   Testing the generic doubly linked array-based list
  * @version 0.5
  * @date    2022-08-16
- * 
+ *
  * @copyright NO COPYRIGHT !(c) 2022
- * 
+ *
  */
 #include <iostream>
 #include <stdlib.h>
@@ -71,8 +71,8 @@ int main(void) {
             if (i % 2 == 0) myList.insert(42, p);
             else if (i % 3 == 0) myList.insert(666, p);
             else if (i % 5 == 0) myList.insert(13, p);
-            else myList.insert(rand() % 99, p);            
-        } else {        
+            else myList.insert(rand() % 99, p);
+        } else {
             if (i % 2 == 0) myList.write(42, p);
             else if (i % 3 == 0) myList.write(666, p);
             else if (i % 5 == 0) myList.write(13, p);

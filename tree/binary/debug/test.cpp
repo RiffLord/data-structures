@@ -1,12 +1,12 @@
 /**
  * @file    test.cpp
- * @author  Bruno Pezer (bruno.pezer@tutanota.com)
+ * @author  Bruno Pezer
  * @brief   Test file for the binary Tree<int> data structure
  * @version 0.9
  * @date    2022-08-30
- * 
+ *
  * @copyright NO COPYRIGHT !(c) 2022
- * 
+ *
  */
 #include <iostream>
 #include <cstdlib>
@@ -40,7 +40,7 @@ int main(void) {
     t.insertRightChild(rand() % 99, n);
     n = t.rightChild(t.getRoot());
     t.insertLeftChild(rand() % 99, n);
-    t.insertRightChild(rand() % 99, n);    
+    t.insertRightChild(rand() % 99, n);
     t.print(t.getRoot());
     cout << endl << "n : " << n << "\tt.read(n) : " << t.read(n) << endl;
     t.write(42, n);

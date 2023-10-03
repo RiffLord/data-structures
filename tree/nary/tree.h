@@ -1,12 +1,12 @@
 /**
  * @file    tree.h
- * @author  Bruno Pezer (bruno.pezer@tutanota.com)
+ * @author  Bruno Pezer
  * @brief   Class definition for a generic n-ary tree data structure
  * @version 0.2
  * @date    2022-10-06
- * 
+ *
  * @copyright NO COPYRIGHT !(c) 2022
- * 
+ *
  */
 #ifndef TREE_H
 #define TREE_H

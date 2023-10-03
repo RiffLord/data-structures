@@ -1,12 +1,12 @@
 /**
  * @file    test.cpp
- * @author  Bruno Pezer (bruno.pezer@tutanota.com)
+ * @author  Bruno Pezer
  * @brief   Testing/debugging a generic pointer-based queue data structure
  * @version 0.4
  * @date    2022-08-17
- * 
+ *
  * @copyright NO COPYRIGHT !(c) 2022
- * 
+ *
  */
 #include <iostream>
 #include <cstdlib>

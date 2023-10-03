@@ -1,10 +1,10 @@
 /**
  * @file    test.cpp
- * @author  Bruno Pezer (bruno.pezer@tutanota.com)
+ * @author  Bruno Pezer
  * @brief   Testing and debugging a generic pointer-based stack's operations
  * @version 0.4
  * @date    2022-08-22
- * 
+ *
  * @copyright NO COPYRIGHT !(c) 2022
  */
 #include <iostream>

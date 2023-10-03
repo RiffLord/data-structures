@@ -1,17 +1,22 @@
 /**
  * @file    tree.h
- * @author  Bruno Pezer (bruno.pezer@tutanota.com)
+ * @author  Bruno Pezer
  * @brief   Generic binary tree data structure definition
- * @version 0.8
+ * @version 0.9
  * @date    2022-08-30
- * 
+ *
  * @copyright NO COPYRIGHT !(c) 2022
- * 
+ *
  */
 #ifndef TREE_H
 #define TREE_H
 #include "node.h"
 
+/**
+ * @brief    Generic binary tree.
+ *
+ * @tparam T Tree type
+ */
 template <typename T> class Tree {
 public:
     Tree();
@@ -38,30 +43,82 @@ private:
     Node<T> *root;
 };
 
+/**
+ * @brief    Class constructor. Creates an empty binary tree.
+ *
+ * @tparam T Tree type
+ */
 template <typename T>
 Tree<T>::Tree() { root = nullptr; }
 
+/**
+ * @brief      Copy constructor. Creates a new tree which is a copy of the one provided as a parameter.
+ *
+ * @tparam T   Tree type
+ * @param rval Tree to copy
+ */
+template <typename T>
+Tree<T>::Tree(const Tree &rval) {}
+
+/**
+ * @brief    Overloaded class constructor. Creates a new tree, setting the node parameter as its root.
+ *
+ * @tparam T Tree type
+ * @param n  Node to use as the tree's root.
+ */
 template <typename T>
 Tree<T>::Tree(Node<T> *n) { insertRoot(n); }
 
+/**
+ * @brief    Class destructor. Deletes all nodes in the tree starting from the root.
+ *
+ * @tparam T Tree type
+ */
 template <typename T>
 Tree<T>::~Tree() { removeSubtree(root); }
 
+/**
+ * @brief    Verifies that the tree is empty by checking if the root is equal to a null pointer.
+ *
+ * @tparam T Tree type
+ * @return   True if the root is equal to a null pointer, false otherwise.
+ */
 template <typename T>
 bool Tree<T>::isEmpty() const { return root == nullptr; }
 
+/**
+ * @brief    Verifies that the provided node has a left child.
+ *
+ * @tparam T Tree type
+ * @param n  Node to check
+ * @return   True if n has a left child, false otherwise.
+ */
 template <typename T>
 bool Tree<T>::hasLeftChild(Node<T> *n) const {
     if (n->getLeftChild() == nullptr) return false;
     else return true;
 }
 
+/**
+ * @brief    Verifies that the provided node has a right child.
+ *
+ * @tparam T Tree type
+ * @param n  Node to check
+ * @return   True if n has a right child, false otherwise.
+ */
 template <typename T>
 bool Tree<T>::hasRightChild(Node<T> *n) const {
     if (n->getRightChild() == nullptr) return false;
-    else return true;    
+    else return true;
 }
 
+/**
+ * @brief    Writes the provided data to the provided node.
+ *
+ * @tparam T Tree type
+ * @param t  Data to write to the node.
+ * @param n  Node in which to store the provided data.
+ */
 template <typename T>
 void Tree<T>::write(T t, Node<T> *n) {
     if (n != nullptr) {
@@ -69,27 +126,42 @@ void Tree<T>::write(T t, Node<T> *n) {
     }
 }
 
+/**
+ * @brief    Sets the provided node as the tree's root if the tree is empty.
+ *
+ * @tparam T Tree type
+ * @param n  Desired root
+ */
 template <typename T>
 void Tree<T>::insertRoot(Node<T> *n) {
     if (!isEmpty())
-        throw std::runtime_error{"Tree::insertRoot()\nTree::isEmpty() == false"};
+        throw std::runtime_error{"Tree::insertRoot():\nTree::isEmpty() == false"};
     root = n;
 }
 
-//  Creates an empty node as n's left child
+/**
+ * @brief    Creates an empty node as the left child of the provided node.
+ *
+ * @tparam T Tree type
+ * @param n  Node to which to add the left child.
+ */
 template <typename T>
 void Tree<T>::insertLeftChild(Node<T> *n) {
     if (isEmpty())
-        throw std::runtime_error{""};
+        throw std::runtime_error{"Tree::insertLeftChild():\nTree:isEmpty() == true"};
     if (hasLeftChild(n))
-        throw std::runtime_error{""};
+        throw std::runtime_error{"Tree::insertLeftChild():\nTree:hasLeftChild() == true"};
     n->setLeftChild(new Node<T>);
     n->getLeftChild()->setParent(n);
 }
 
 /**
- *  Creates a new node with the provided data
- *  and sets it to be n's left child
+ * @brief    Overloaded insertion method. Creates a new node storing the provided
+ *           data in it and sets it to be the provided node's left child.
+ *
+ * @tparam T
+ * @param t
+ * @param n
  */
 template <typename T>
 void Tree<T>::insertLeftChild(T t, Node<T> *n) {
@@ -97,10 +169,15 @@ void Tree<T>::insertLeftChild(T t, Node<T> *n) {
         throw std::runtime_error{""};
     if (hasLeftChild(n))
         throw std::runtime_error{""};
-    n->setLeftChild(new Node<T>(t, n));   
+    n->setLeftChild(new Node<T>(t, n));
 }
 
-//  Creates an empty node as n's right child
+/**
+ * @brief    Creates an empty node as the right child of the provided node.
+ *
+ * @tparam T Tree type
+ * @param n  Node to which to add the right child.
+ */
 template <typename T>
 void Tree<T>::insertRightChild(Node<T> *n) {
     if (isEmpty())
@@ -112,8 +189,11 @@ void Tree<T>::insertRightChild(Node<T> *n) {
 }
 
 /**
- *  Creates a new node with the provided data
- *  and sets it to be n's right child
+ * @brief    Overloaded insertion method. Creates a new node storing the provided
+ *           data in it and sets it to be the provided node's left child.
+ *
+ * @tparam T Tree type
+ * @param n  Node to which to add the right child.
  */
 template <typename T>
 void Tree<T>::insertRightChild(T t, Node<T> *n) {
@@ -121,9 +201,15 @@ void Tree<T>::insertRightChild(T t, Node<T> *n) {
         throw std::runtime_error{""};
     if (hasRightChild(n))
         throw std::runtime_error{""};
-    n->setRightChild(new Node<T>(t, n));   
+    n->setRightChild(new Node<T>(t, n));
 }
 
+/**
+ * @brief    Removes all of the provided node's descendants from the tree.
+ *
+ * @tparam T Tree type
+ * @param n  Subtree's root.
+ */
 template <typename T>
 void Tree<T>::removeSubtree(Node<T> *n) {
     if (n != nullptr) {
@@ -146,13 +232,26 @@ void Tree<T>::removeSubtree(Node<T> *n) {
     }
 }
 
+/**
+ * @brief    Obtains the tree's root node.
+ *
+ * @tparam T Tree type
+ * @return   root
+ */
 template <typename T>
 Node<T> *Tree<T>::getRoot() const {
     if (isEmpty())
-        throw std::runtime_error{"Tree::getRoot()\nTree::isEmpty() == true"}; 
-    return root; 
+        throw std::runtime_error{"Tree::getRoot()\nTree::isEmpty() == true"};
+    return root;
 }
 
+/**
+ * @brief    Obtains the provided node's parent.
+ *
+ * @tparam T Tree type
+ * @param n  Node whose parent is needed.
+ * @return   The provided node's parent.
+ */
 template <typename T>
 Node<T> *Tree<T>::parent(Node<T> *n) const {
     if (isEmpty())
@@ -162,30 +261,57 @@ Node<T> *Tree<T>::parent(Node<T> *n) const {
     return n->getParent();
 }
 
+/**
+ * @brief    Obtains the provided node's left child.
+ *
+ * @tparam T Tree type
+ * @param n  Node whose left child is needed.
+ * @return   The provided node's left child.
+ */
 template <typename T>
 Node<T> *Tree<T>::leftChild(Node<T> *n) const {
     if (isEmpty())
         throw std::runtime_error{"Tree::leftChild()\nTree::isEmpty() == true"};
     if (n == nullptr)
-        throw std::runtime_error{"Tree::leftChild()"}; 
-    return n->getLeftChild(); 
+        throw std::runtime_error{"Tree::leftChild()"};
+    return n->getLeftChild();
 }
 
+/**
+ * @brief    Obtains the provided node's right child.
+ *
+ * @tparam T Tree type
+ * @param n  Node whose right child is needed.
+ * @return   The provided node's right child.
+ */
 template <typename T>
 Node<T> *Tree<T>::rightChild(Node<T> *n) const {
     if (isEmpty())
         throw std::runtime_error{"Tree::rightChild()\nTree::isEmpty() == true"};
     if (n == nullptr)
-        throw std::runtime_error{"Tree::rightChild()"}; 
-    return n->getRightChild(); 
+        throw std::runtime_error{"Tree::rightChild()"};
+    return n->getRightChild();
 }
 
+/**
+ * @brief    Obtains the data stored in the provided node.
+ *
+ * @tparam T Data type
+ * @param n  Node to read.
+ * @return   Node contents
+ */
 template <typename T>
 T Tree<T>::read(Node<T> *n) const { return n->getData(); }
 
-//  TODO:   transform into overloaded output operator
+/**
+ * @brief    Prints the provided node's contents and the contents of its left and right children, if it has them.
+ *
+ * @tparam T Tree type
+ * @param n  Node from which to start printing.
+ */
 template <typename T>
 void Tree<T>::print(Node<T> *n) {
+    //  TODO: transform into overloaded output operator.
     using namespace std;
     cout << "[" << n->getData() << ", ";
     if (hasLeftChild(n)) print(leftChild(n));

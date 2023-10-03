@@ -1,12 +1,12 @@
 /**
  * @file    test.cpp
- * @author  Bruno Pezer (bruno.pezer@tutanota.com)
+ * @author  Bruno Pezer
  * @brief   Testing the pointer implementation of a generic linked list data structure
- * @version 0.5
+ * @version 0.6
  * @date    2022-08-17
- * 
+ *
  * @copyright NO COPYRIGHT !(c) 2022
- * 
+ *
  */
 #include <iostream>
 #include <cstdlib>
@@ -33,7 +33,7 @@ int main(void) {
     for (i = 0; i < 10; i++) {
         myList.insert(i + rand() % 89, p);
         p = myList.next(p);
-    } 
+    }
     if (!myList.isEmpty()) cout << "myList.isEmpty() : false" << endl;
     if (myList.endOfList(p)) cout << "myList.endOfList(" << p << ") : true" << endl;
     if (!myList.endOfList(myList.first())) cout << "myList.endOfList(first()) : false" << endl;
@@ -81,7 +81,7 @@ int main(void) {
     if (otherList != myList) cout << "otherList != myList : true" << endl;
     if (!(otherList == myList)) cout << "otherList == myList : false" << endl;
     //cout << "Assigning otherList to myList..." << endl;
-//    myList = otherList;
+    //myList = otherList;
     //cout << "myList after using overloaded assignment operator...\n" << myList << endl;
     if (!(otherList != myList)) cout << "otherList != myList : false" << endl;
     if (otherList == myList) cout << "otherList == myList : true" << endl;
@@ -105,8 +105,6 @@ int main(void) {
     strList.insert("Renée", pos);
     pos = strList.next(pos);
     strList.insert("Leclerc", pos);
-    pos = strList.next(pos);
-    strList.insert("Mr. Hilter", pos);
     pos = strList.next(pos);
     cout << strList << endl;
     return 0;

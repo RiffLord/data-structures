@@ -1,12 +1,12 @@
 /**
  * @file      nodetest.cpp
- * @author    Bruno Pezer (bruno.pezer@tutanota.com)
+ * @author    Bruno Pezer
  * @brief     Testing a generic node class for use in a binary tree data structure
  * @version   0.3
  * @date      2022-09-05
- * 
+ *
  * @copyright NO COPYRIGHT !(c) 2022
- * 
+ *
  */
 #include <iostream>
 #ifdef __linux__
@@ -52,7 +52,7 @@ int main(void) {
     Node<int> *root = n;
     cout << "Printing binary tree..." << endl;
     cout << "   " << root->getData() << endl << "   / \\"
-         << endl << "  " <<  root->getLeftChild()->getData() 
+         << endl << "  " <<  root->getLeftChild()->getData()
          << " " << root->getRightChild()->getData() << endl;
     return 0;
 }

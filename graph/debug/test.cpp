@@ -1,12 +1,12 @@
 /**
  * @file      test.cpp
- * @author    Bruno Pezer (bruno.pezer@tutanota.com)
+ * @author    Bruno Pezer
  * @brief     Testing the graph implementation
  * @version   0.1
  * @date      2022-10-20
- * 
+ *
  * @copyright NO COPYRIGHT !(c) 2022
- * 
+ *
  */
 #include <iostream>
 #ifdef __linux__
